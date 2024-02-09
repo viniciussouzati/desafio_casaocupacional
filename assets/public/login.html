@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/fonts.css" rel="stylesheet" />
+    <link href="/assets/css/new-style.css" rel="stylesheet" />
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .login {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .login__title {
+            color: #222c59;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .login__form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login__input {
+            background-color: #f5f6f8;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            padding: 12px 20px;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .login__button {
+            background-color: #00a9c8;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 12px 40px;
+            transition: background-color 0.3s ease;
+        }
+
+        .login__button:hover {
+            background-color: #007f8c;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h1 class="login__title">Login</h1>
+        <form class="login__form" method="POST" onsubmit="return validateForm()">
+            <input type="email" name="email" id="email" class="login__input" placeholder="Email" required />
+            <span class="error-message" id="emailError">Por favor, insira um email válido.</span>
+            <input type="password" name="password" id="password" class="login__input" placeholder="Senha" required />
+            <span class="error-message" id="passwordError">A senha deve ter pelo menos 8 caracteres.</span>
+            <button type="submit" class="login__button">Entrar</button>
+        </form>
+    </div>
+    <script src='/assets/js/form-validation.js'></script>
+    <script src='/assets/js/show-password.js'></script>
+    <script>
+        function validateForm() {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordPattern = /.{8,}/;
+
+            if (!emailPattern.test(emailInput.value)) {
+                emailError.style.display = 'block';
+                return false;
+            } else {
+                emailError.style.display = 'none';
+            }
+
+            if (!passwordPattern.test(passwordInput.value)) {
+                passwordError.style.display = 'block';
+                return false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+
+            // Redirecionar se a validação for bem-sucedida
+            window.location.href = "https://www.casaocupacional.com.br/";
+            return false;
+        }
+            function showMessageError(input, errorElement, message) {
+                    input.classList.add('error');
+                    errorElement.style.display = 'block';
+                    errorElement.textContent = message;
+                }
+    
+                // Função para ocultar mensagem de erro
+                function hideMessageError(input, errorElement) {
+                    input.classList.remove('error');
+                    errorElement.style.display = 'none';
+                    errorElement.textContent = '';
+                }
+    
+                // Função para verificar se um e-mail é válido
+                function isValidEmail(email) {
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return emailPattern.test(email);
+                }
+    </script>
+</body>
+</html>
